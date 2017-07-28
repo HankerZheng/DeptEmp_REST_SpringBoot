@@ -12,4 +12,5 @@ public interface DepartmentDAO {
     public Department findDepartmentById(Integer id);
     public List<Department> findAllDepartments();
     public List<Department> findDepartmentByName(String name);
+    public Department deleteDepartmentById(Integer id);
 }

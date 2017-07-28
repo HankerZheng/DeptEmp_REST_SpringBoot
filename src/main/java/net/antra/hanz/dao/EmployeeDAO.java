@@ -12,4 +12,5 @@ public interface EmployeeDAO {
     public Employee findEmployeeById(Integer id);
     public List<Employee> findAllEmployees();
     public List<Employee> findEmployeeByName(String name);
+    public Employee deleteEmployeeById(Integer id);
 }

@@ -44,4 +44,12 @@ public class DepartmentDAOImpl implements DepartmentDAO{
         query.setParameter("name", name);
         return query.getResultList();
     }
+
+    @Transactional
+    @Override
+    public Department deleteDepartmentById(Integer id) {
+        Department d = em.find(Department.class, id);
+        em.remove(d);
+        return d;
+    }
 }

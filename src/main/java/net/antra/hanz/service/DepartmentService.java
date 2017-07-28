@@ -13,4 +13,5 @@ public interface DepartmentService {
     public List<Department> findAllDepartments();
     public Department findDepartmentById(Integer id);
     public List<Department> findDepartmentByName(String name);
+    public Department deleteDepartmentById(Integer id);
 }

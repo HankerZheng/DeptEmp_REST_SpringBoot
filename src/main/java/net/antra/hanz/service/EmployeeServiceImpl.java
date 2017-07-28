@@ -22,7 +22,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     DepartmentDAO departmentDAO;
 
-
     @Transactional
     @Override
     public void saveEmployee(Employee e, Integer deptId) {
@@ -47,5 +46,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findEmployeeByName(String name) {
         return employeeDAO.findEmployeeByName(name);
+    }
+
+    @Override
+    public Employee deleteEmployeeById(Integer id) {
+        return employeeDAO.deleteEmployeeById(id);
     }
 }

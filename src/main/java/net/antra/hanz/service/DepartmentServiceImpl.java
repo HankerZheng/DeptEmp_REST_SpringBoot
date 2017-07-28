@@ -40,4 +40,11 @@ public class DepartmentServiceImpl implements DepartmentService{
     public List<Department> findDepartmentByName(String name) {
         return departmentDAO.findDepartmentByName(name);
     }
+
+    @Transactional
+    @Override
+    public Department deleteDepartmentById(Integer id) {
+        return departmentDAO.deleteDepartmentById(id);
+    }
+
 }
