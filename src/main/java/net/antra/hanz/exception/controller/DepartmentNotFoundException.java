@@ -1,6 +1,7 @@
 package net.antra.hanz.exception.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 
 @ResponseStatus(code=HttpStatus.NOT_FOUND, reason="Department not found!")
-public class DepartmentNotFoundException extends RuntimeException {
+public class DepartmentNotFoundException extends Exception{
 
     public DepartmentNotFoundException(String message) {
         super(message);

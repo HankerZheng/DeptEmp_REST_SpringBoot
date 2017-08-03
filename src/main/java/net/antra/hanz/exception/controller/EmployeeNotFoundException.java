@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by hanzheng on 8/1/17.
  */
-@ResponseStatus(code= HttpStatus.NOT_FOUND)
-public class EmployeeNotFoundException extends RuntimeException{
+
+@ResponseStatus(code=HttpStatus.NOT_FOUND, reason="Employee not found!")
+public class EmployeeNotFoundException extends Exception {
 
     public EmployeeNotFoundException(String message) {
         super(message);
