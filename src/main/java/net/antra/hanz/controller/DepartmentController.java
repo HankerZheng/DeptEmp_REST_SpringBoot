@@ -1,7 +1,7 @@
 package net.antra.hanz.controller;
 
 import net.antra.hanz.exception.controller.DepartmentNotFoundException;
-import net.antra.hanz.pojo.Department;
+import net.antra.hanz.persistence.entity.Department;
 import net.antra.hanz.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,13 +19,15 @@ public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
-    @RequestMapping(path="/department", method=RequestMethod.GET)
+    // Find all departments
+    @RequestMapping(path="/departments", method=RequestMethod.GET)
     public List<Department> getAllDepartments() {
         return departmentService.findAllDepartments();
     }
 
-    @RequestMapping(path="/department/id/{id}", method=RequestMethod.GET)
-    public Department getDepartmentById(@PathVariable Integer id){
+    // Find one department with ID
+    @RequestMapping(path="/departments/{id}", method=RequestMethod.GET)
+    public Department getDepartmentById(@PathVariable Integer id) throws DepartmentNotFoundException{
         Department d = departmentService.findDepartmentById(id);
         if (d == null) {
             throw new DepartmentNotFoundException("department ID(" + id + ")is not found in the database!!");
@@ -33,8 +35,30 @@ public class DepartmentController {
         return d;
     }
 
-    @RequestMapping(path="/department/name/{name}", method=RequestMethod.GET)
-    public List<Department> getDepartmentsByName(@PathVariable String name) {
+    // Create new department
+    @RequestMapping(path="/departments", method=RequestMethod.POST)
+    public Department addDepartment(Department d) {
+        return departmentService.saveDepartment(d);
+    }
+
+//    @RequestMapping(path="/departments/{id}", method=RequestMethod.PUT)
+//    public Department updateDepartment(Department d){
+//        departmentService.saveDepartment(d);
+//    }
+
+
+    @RequestMapping(path="/departments/{id}", method=RequestMethod.DELETE)
+    public Department deleteDepartmentById(@PathVariable Integer id) throws DepartmentNotFoundException{
+        Department d = departmentService.deleteDepartmentById(id);
+        if (d == null) {
+            throw new DepartmentNotFoundException("department ID(" + id + ") is not found in the database! Delete operation cannot be performed!");
+        }
+        d.setEmployees(null);
+        return d;
+    }
+
+    @RequestMapping(path="/departments/name/{name}", method=RequestMethod.GET)
+    public List<Department> getDepartmentsByName(@PathVariable String name) throws DepartmentNotFoundException{
         List<Department> res = departmentService.findDepartmentByName(name);
         if(res.size() == 0) {
             throw new DepartmentNotFoundException("department name(" + name + ") is not found in the database!!");
@@ -42,20 +66,16 @@ public class DepartmentController {
         return res;
     }
 
-    @RequestMapping(path="/department", method=RequestMethod.POST)
-    public Department addDepartment(Department d) {
-        departmentService.saveDepartment(d);
-        return d;
+
+    @RequestMapping(path="/departments/search/empid/{id}", method=RequestMethod.GET)
+    public List<Department> getDepartmentByEmpId(@PathVariable Integer id) throws DepartmentNotFoundException{
+        List<Department> res = departmentService.findDepartmentByEmpId(id);
+        if (res.size() == 0) {
+            throw new DepartmentNotFoundException("There is no department who has an employee with id(" + id + ")!!");
+        }
+        return res;
     }
 
-    @RequestMapping(path="/department/id/{id}", method=RequestMethod.DELETE)
-    public Department deleteDepartmentById(@PathVariable Integer id) {
-        Department d = departmentService.deleteDepartmentById(id);
-        if (d == null) {
-            throw new DepartmentNotFoundException("department ID(" + id + ") is not found in the database! Delete operation cannot be performed!");
-        }
-        return d;
-    }
 
     @ResponseStatus(code=HttpStatus.NOT_FOUND)
     @ExceptionHandler(DepartmentNotFoundException.class)

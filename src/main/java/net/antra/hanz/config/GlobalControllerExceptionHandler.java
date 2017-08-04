@@ -1,26 +1,32 @@
 package net.antra.hanz.config;
 
 import net.antra.hanz.exception.ErrorTestException;
+import net.antra.hanz.exception.OtherException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Locale;
 
 /**
  * Created by hanzheng on 8/1/17.
  */
-
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
+
+    @Autowired
+    MessageSource messageSource;
 
     @ResponseStatus(code=HttpStatus.SERVICE_UNAVAILABLE)
     @ExceptionHandler(ErrorTestException.class)
     public String handlerUnexpectedException(Exception e) {
-        return e.getMessage();
+        return e.getMessage() + "\n" + messageSource.getMessage("error", null, Locale.CHINESE);
     }
 
-    @ResponseStatus(code=HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler({Error.class, RuntimeException.class})
+    @ResponseStatus(code=HttpStatus.CONFLICT)
+    @ExceptionHandler(OtherException.class)
     public String handleUncheckedException(Exception e) {
         return e.getMessage();
     }

@@ -1,9 +1,9 @@
 package net.antra.hanz.service;
 
-import net.antra.hanz.dao.DepartmentDAO;
-import net.antra.hanz.dao.EmployeeDAO;
-import net.antra.hanz.pojo.Department;
-import net.antra.hanz.pojo.Employee;
+import net.antra.hanz.persistence.entity.Department;
+import net.antra.hanz.persistence.entity.Employee;
+import net.antra.hanz.persistence.repository.DepartmentRepository;
+import net.antra.hanz.persistence.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,39 +17,42 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    EmployeeDAO employeeDAO;
+    EmployeeRepository employeeRepository;
 
     @Autowired
-    DepartmentDAO departmentDAO;
+    DepartmentRepository departmentRepository;
 
     @Transactional
     @Override
-    public void saveEmployee(Employee e, Integer deptId) {
-        Department d = departmentDAO.findDepartmentById(deptId);
+    public Employee saveEmployee(Employee e, Integer deptId) {
+        Department d = departmentRepository.findOne(deptId);
         e.setDepartment(d);
-        employeeDAO.save(e);
+        return employeeRepository.save(e);
     }
 
     @Transactional
     @Override
-    public List<Employee> findAllEmployees() {
-        return employeeDAO.findAllEmployees();
+    public List<Employee> findAllEmployees(){
+        return employeeRepository.findAll();
     }
 
     @Transactional
     @Override
     public Employee findEmployeeById(Integer id){
-        return employeeDAO.findEmployeeById(id);
+        return employeeRepository.findOne(id);
     }
 
     @Transactional
     @Override
     public List<Employee> findEmployeeByName(String name) {
-        return employeeDAO.findEmployeeByName(name);
+        return employeeRepository.findByName(name);
     }
 
+    @Transactional
     @Override
     public Employee deleteEmployeeById(Integer id) {
-        return employeeDAO.deleteEmployeeById(id);
+        Employee e = employeeRepository.findOne(id);
+        if (e != null) employeeRepository.delete(e);
+        return e;
     }
 }

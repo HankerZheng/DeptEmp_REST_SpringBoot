@@ -1,8 +1,11 @@
-package net.antra.hanz.pojo;
+package net.antra.hanz.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by hanzheng on 7/27/17.
@@ -13,24 +16,28 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="emp_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "emp_id")
     Integer empId;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     String lastName;
 
-    @Column(name="age")
+    @Column(name = "age")
     Integer age;
 
-//    @Column(name="dept_id", updatable=false, insertable=false)
-//    Integer deptId;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="dept_id")
+    //    @Column(name="dept_id", updatable=false, insertable=false)
+//    Integer deptId;
+    @OneToMany(mappedBy = "employee")
+    @JsonBackReference
+    List<CourseEmployeeAssociation> caes;
+
+    @ManyToOne
+    @JoinColumn(name = "dept_id")
     @JsonBackReference
     Department department;
 
@@ -80,5 +87,13 @@ public class Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public List<CourseEmployeeAssociation> getCeas() {
+        return caes;
+    }
+
+    public void setCeas(List<CourseEmployeeAssociation> ceas) {
+        this.caes = ceas;
     }
 }

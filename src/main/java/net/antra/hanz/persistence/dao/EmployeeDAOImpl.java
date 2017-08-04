@@ -1,6 +1,6 @@
-package net.antra.hanz.dao;
+package net.antra.hanz.persistence.dao;
 
-import net.antra.hanz.pojo.Employee;
+import net.antra.hanz.persistence.entity.Employee;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,6 @@
-package net.antra.hanz.dao;
+package net.antra.hanz.persistence.dao;
 
-import net.antra.hanz.pojo.Department;
+import net.antra.hanz.persistence.entity.Department;
 
 import java.util.List;
 

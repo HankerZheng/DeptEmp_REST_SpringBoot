@@ -1,6 +1,6 @@
-package net.antra.hanz.dao;
+package net.antra.hanz.persistence.dao;
 
-import net.antra.hanz.pojo.User;
+import net.antra.hanz.persistence.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

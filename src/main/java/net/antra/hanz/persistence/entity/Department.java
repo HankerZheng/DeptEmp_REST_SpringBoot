@@ -1,4 +1,4 @@
-package net.antra.hanz.pojo;
+package net.antra.hanz.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -25,7 +25,7 @@ public class Department {
 
     @OneToMany(mappedBy = "department")
     @JsonManagedReference
-    List<Employee> empList;
+    List<Employee> employees;
 
     public Integer getDeptId() {
         return deptId;
@@ -51,11 +51,11 @@ public class Department {
         this.deptEmail = deptEmail;
     }
 
-    public List<Employee> getEmpList() {
-        return empList;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmpList(List<Employee> empList) {
-        this.empList = empList;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

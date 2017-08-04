@@ -1,4 +1,4 @@
-package net.antra.hanz.pojo;
+package net.antra.hanz.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
