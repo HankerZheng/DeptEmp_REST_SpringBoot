@@ -30,7 +30,7 @@ public class DepartmentController {
     public Department getDepartmentById(@PathVariable Integer id) throws DepartmentNotFoundException{
         Department d = departmentService.findDepartmentById(id);
         if (d == null) {
-            throw new DepartmentNotFoundException("department ID(" + id + ")is not found in the database!!");
+            throw new DepartmentNotFoundException("ID", id.toString());
         }
         return d;
     }
@@ -41,17 +41,20 @@ public class DepartmentController {
         return departmentService.saveDepartment(d);
     }
 
-//    @RequestMapping(path="/departments/{id}", method=RequestMethod.PUT)
-//    public Department updateDepartment(Department d){
-//        departmentService.saveDepartment(d);
-//    }
+    // Update an existing department
+    @RequestMapping(path="/departments/{id}", method=RequestMethod.PUT)
+    public Department updateDepartment(Department d, @PathVariable Integer id) throws DepartmentNotFoundException{
+        Department updated = departmentService.updateDepartment(d, id);
+        if (updated == null) throw new DepartmentNotFoundException("ID", id.toString());
+        return updated;
+    }
 
 
     @RequestMapping(path="/departments/{id}", method=RequestMethod.DELETE)
     public Department deleteDepartmentById(@PathVariable Integer id) throws DepartmentNotFoundException{
         Department d = departmentService.deleteDepartmentById(id);
         if (d == null) {
-            throw new DepartmentNotFoundException("department ID(" + id + ") is not found in the database! Delete operation cannot be performed!");
+            throw new DepartmentNotFoundException("ID", id.toString());
         }
         d.setEmployees(null);
         return d;
@@ -61,7 +64,7 @@ public class DepartmentController {
     public List<Department> getDepartmentsByName(@PathVariable String name) throws DepartmentNotFoundException{
         List<Department> res = departmentService.findDepartmentByName(name);
         if(res.size() == 0) {
-            throw new DepartmentNotFoundException("department name(" + name + ") is not found in the database!!");
+            throw new DepartmentNotFoundException("Name", name);
         }
         return res;
     }
@@ -71,7 +74,7 @@ public class DepartmentController {
     public List<Department> getDepartmentByEmpId(@PathVariable Integer id) throws DepartmentNotFoundException{
         List<Department> res = departmentService.findDepartmentByEmpId(id);
         if (res.size() == 0) {
-            throw new DepartmentNotFoundException("There is no department who has an employee with id(" + id + ")!!");
+            throw new DepartmentNotFoundException("with EmpID", id.toString());
         }
         return res;
     }

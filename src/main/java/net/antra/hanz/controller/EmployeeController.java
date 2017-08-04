@@ -29,7 +29,7 @@ public class EmployeeController {
     public Employee getEmployeeById(@PathVariable Integer id) throws EmployeeNotFoundException{
         Employee e = employeeService.findEmployeeById(id);
         if(e == null) {
-            throw new EmployeeNotFoundException("employee ID(" + id + ") is not found in the database!!");
+            throw new EmployeeNotFoundException("ID", id.toString());
         }
         return e;
     }
@@ -39,7 +39,7 @@ public class EmployeeController {
     public List<Employee> getEmployeesByName(@PathVariable String name) throws EmployeeNotFoundException{
         List<Employee> eList = employeeService.findEmployeeByName(name);
         if (eList.size() == 0) {
-            throw new EmployeeNotFoundException("employee name(" + name + ") is not found in the database!!");
+            throw new EmployeeNotFoundException("Name", name);
         }
         return eList;
     }
@@ -53,7 +53,7 @@ public class EmployeeController {
     public Employee deleteEmployeeById(@PathVariable Integer id) throws EmployeeNotFoundException{
         Employee e = employeeService.deleteEmployeeById(id);
         if(e == null) {
-            throw new EmployeeNotFoundException("employee name(" + id + ") is not found in the database!! Delete operation cannot be performed!");
+            throw new EmployeeNotFoundException("ID", id.toString());
         }
         return e;
     }

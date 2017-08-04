@@ -15,4 +15,8 @@ public class DepartmentNotFoundException extends Exception{
         super(message);
     }
 
+    public DepartmentNotFoundException(String property, String value) {
+        super("Department " + property + "(" + value + ") is not found in the database!!");
+    }
+
 }

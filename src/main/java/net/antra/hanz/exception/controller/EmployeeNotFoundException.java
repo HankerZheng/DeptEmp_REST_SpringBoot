@@ -1,5 +1,6 @@
 package net.antra.hanz.exception.controller;
 
+import net.antra.hanz.persistence.entity.Employee;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -12,5 +13,9 @@ public class EmployeeNotFoundException extends Exception {
 
     public EmployeeNotFoundException(String message) {
         super(message);
+    }
+
+    public EmployeeNotFoundException(String property, String value) {
+        super("Employee " + property + "(" + value + ") is not found in the database!!");
     }
 }
