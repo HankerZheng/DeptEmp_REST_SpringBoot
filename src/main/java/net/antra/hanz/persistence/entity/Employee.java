@@ -29,16 +29,13 @@ public class Employee {
     @Column(name = "age")
     Integer age;
 
-
-    //    @Column(name="dept_id", updatable=false, insertable=false)
-//    Integer deptId;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
+//    @JsonBackReference
     List<CourseEmployeeAssociation> caes;
 
     @ManyToOne
     @JoinColumn(name = "dept_id")
-    @JsonBackReference
+//    @JsonBackReference
     Department department;
 
     public Integer getEmpId() {
@@ -72,14 +69,6 @@ public class Employee {
     public void setAge(Integer age) {
         this.age = age;
     }
-
-//    public Integer getDeptId() {
-//        return deptId;
-//    }
-//
-//    public void setDeptId(Integer deptId) {
-//        this.deptId = deptId;
-//    }
 
     public Department getDepartment() {
         return department;

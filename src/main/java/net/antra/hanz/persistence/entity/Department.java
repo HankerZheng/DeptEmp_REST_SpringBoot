@@ -24,7 +24,7 @@ public class Department {
     String deptEmail;
 
     @OneToMany(mappedBy = "department")
-    @JsonManagedReference
+//    @JsonManagedReference
     List<Employee> employees;
 
     public Integer getDeptId() {

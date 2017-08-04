@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {
 
-    List<Department> findByDeptName(String deptName);
-    List<Department> findByDeptEmail(String deptEmail);
+    List<Department> findByDeptNameLike(String deptName);
+    List<Department> findByDeptEmailLike(String deptEmail);
 
     @Query("select d from Department d join d.employees e where e.empId = ?1")
     List<Department> findByEmpId(Integer empId);

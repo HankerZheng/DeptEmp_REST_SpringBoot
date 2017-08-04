@@ -21,6 +21,6 @@ public interface EmployeeService {
     public Employee findEmployeeById(Integer id);
 
     // search queries
-    public List<Employee> findEmployeeByName(String name);
+    public List<Employee> searchEmployeeByName(String name);
 
 }

@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public List<Employee> findEmployeeByName(String name) {
+    public List<Employee> searchEmployeeByName(String name) {
         return employeeRepository.findByName(name);
     }
 

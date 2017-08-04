@@ -22,6 +22,6 @@ public interface DepartmentService {
     public Department findDepartmentById(Integer id);
 
     // search queries
-    public List<Department> findDepartmentByName(String name);
-    public List<Department> findDepartmentByEmpId(Integer empId);
+    public List<Department> searchDepartmentByName(String name);
+    public List<Department> searchDepartmentByEmpId(Integer empId);
 }

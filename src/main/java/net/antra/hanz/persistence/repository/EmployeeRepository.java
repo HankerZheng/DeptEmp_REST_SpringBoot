@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    @Query("select e from Employee e where e.firstName = ?1 or e.lastName = ?1")
+    @Query("select e from Employee e where e.firstName like ?1 or e.lastName like ?1")
     public List<Employee> findByName(String name);
 }

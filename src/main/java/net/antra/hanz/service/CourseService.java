@@ -20,6 +20,6 @@ public interface CourseService {
     public Course findCourseById(Integer id);
 
     // search queries
-    public List<Course> findCourseByName(String name);
-    public List<Course> findCourseByEmpId(Integer empId);
+    public List<Course> searchCourseByName(String name);
+    public List<Course> searchCourseByEmpId(Integer empId);
 }

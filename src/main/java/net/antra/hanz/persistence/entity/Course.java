@@ -21,7 +21,7 @@ public class Course {
     String courseName;
 
     @OneToMany(mappedBy="course")
-    @JsonManagedReference
+//    @JsonManagedReference
     List<CourseEmployeeAssociation> caes;
 
     public Integer getCourseId() {

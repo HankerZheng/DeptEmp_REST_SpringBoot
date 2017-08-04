@@ -19,13 +19,17 @@ public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
-    // Find all departments
+    /*
+     * Retrieve all departments
+     */
     @GetMapping(path="/departments")
     public List<Department> getAllDepartments() {
         return departmentService.findAllDepartments();
     }
 
-    // Find one department with ID
+    /*
+     * Retrieve one department according to its ID
+     */
     @GetMapping(path="/departments/{id}")
     public Department getDepartmentById(@PathVariable Integer id) throws DepartmentNotFoundException{
         Department d = departmentService.findDepartmentById(id);
@@ -35,34 +39,50 @@ public class DepartmentController {
         return d;
     }
 
-    // Create new department
+    /*
+     * Create a new department
+     */
     @PostMapping(path="/departments")
     public Department addDepartment(Department d) {
         return departmentService.saveDepartment(d);
     }
 
-    // Update an existing department
+    /*
+     * Update an existing department
+     */
     @PutMapping(path="/departments/{id}")
     public Department updateDepartment(Department d, @PathVariable Integer id) throws DepartmentNotFoundException{
         Department updated = departmentService.updateDepartment(d, id);
-        if (updated == null) throw new DepartmentNotFoundException("ID", id.toString());
+        if (updated == null){
+            throw new DepartmentNotFoundException("ID", id.toString());
+        }
         return updated;
     }
 
-
+    /*
+     * Delete an existing department
+     */
     @DeleteMapping(path="/departments/{id}")
     public Department deleteDepartmentById(@PathVariable Integer id) throws DepartmentNotFoundException{
         Department d = departmentService.deleteDepartmentById(id);
         if (d == null) {
             throw new DepartmentNotFoundException("ID", id.toString());
         }
-        d.setEmployees(null);
         return d;
     }
 
-    @GetMapping(path="/departments/name/{name}")
+
+
+    /*
+     * Search Queries
+     */
+
+    /*
+     * Search departments according to their name
+     */
+    @GetMapping(path="/search/departments/name/{name}")
     public List<Department> getDepartmentsByName(@PathVariable String name) throws DepartmentNotFoundException{
-        List<Department> res = departmentService.findDepartmentByName(name);
+        List<Department> res = departmentService.searchDepartmentByName(name);
         if(res.size() == 0) {
             throw new DepartmentNotFoundException("Name", name);
         }
@@ -70,9 +90,12 @@ public class DepartmentController {
     }
 
 
-    @GetMapping(path="/departments/search/empid/{id}")
+    /*
+     * Search departments according to the employee ID
+     */
+    @GetMapping(path="/search/departments/empid/{id}")
     public List<Department> getDepartmentByEmpId(@PathVariable Integer id) throws DepartmentNotFoundException{
-        List<Department> res = departmentService.findDepartmentByEmpId(id);
+        List<Department> res = departmentService.searchDepartmentByEmpId(id);
         if (res.size() == 0) {
             throw new DepartmentNotFoundException("with EmpID", id.toString());
         }
@@ -80,6 +103,9 @@ public class DepartmentController {
     }
 
 
+    /*
+     * Exception handler for Department
+     */
     @ResponseStatus(code=HttpStatus.NOT_FOUND)
     @ExceptionHandler(DepartmentNotFoundException.class)
     public String departmentException(Exception e) {

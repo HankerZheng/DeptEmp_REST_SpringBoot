@@ -21,12 +21,12 @@ public class CourseEmployeeAssociation {
 
     @ManyToOne
     @JoinColumn(name="emp_id")
-    @JsonBackReference
+//    @JsonBackReference
     Employee employee;
 
     @ManyToOne
     @JoinColumn(name="course_id")
-    @JsonBackReference
+//    @JsonBackReference
     Course course;
 
 

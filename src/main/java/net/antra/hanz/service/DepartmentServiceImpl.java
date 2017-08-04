@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,13 +49,13 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Transactional
     @Override
-    public List<Department> findDepartmentByName(String name) {
-        return departmentRepository.findByDeptName(name);
+    public List<Department> searchDepartmentByName(String name) {
+        return departmentRepository.findByDeptNameLike(name);
     }
 
     @Transactional
     @Override
-    public List<Department> findDepartmentByEmpId(Integer empId) {
+    public List<Department> searchDepartmentByEmpId(Integer empId) {
         return departmentRepository.findByEmpId(empId);
     }
 

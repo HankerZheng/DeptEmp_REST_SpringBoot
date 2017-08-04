@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface CourseRepository extends JpaRepository<Course, Integer> {
 
-    List<Course> findByCourseName(String name);
+    List<Course> findByCourseNameLike(String name);
 
     @Query("select c from Course c join c.caes cae join cae.employee e where e.empId = ?1")
     List<Course> findByEmpId(Integer empId);

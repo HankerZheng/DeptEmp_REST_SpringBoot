@@ -1,6 +1,5 @@
 package net.antra.hanz.service;
 
-import net.antra.hanz.exception.controller.CourseNotFoundException;
 import net.antra.hanz.persistence.entity.Course;
 import net.antra.hanz.persistence.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,13 +58,13 @@ public class CourseServiceImpl implements CourseService{
 
     @Transactional
     @Override
-    public List<Course> findCourseByName(String name) {
-        return courseRepository.findByCourseName(name);
+    public List<Course> searchCourseByName(String name) {
+        return courseRepository.findByCourseNameLike(name);
     }
 
     @Transactional
     @Override
-    public List<Course> findCourseByEmpId(Integer empId) {
+    public List<Course> searchCourseByEmpId(Integer empId) {
         return courseRepository.findByEmpId(empId);
     }
 
