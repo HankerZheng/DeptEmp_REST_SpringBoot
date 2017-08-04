@@ -26,6 +26,18 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Transactional
     @Override
+    public Department updateDepartment(Department d, Integer id) {
+        Department persistDept = departmentRepository.getOne(id);
+        if (persistDept == null) {
+            return persistDept;
+        }
+        persistDept.setDeptName(d.getDeptName());
+        persistDept.setDeptEmail(d.getDeptEmail());
+        return departmentRepository.save(persistDept);
+    }
+
+    @Transactional
+    @Override
     public List<Department> findAllDepartments() {
         return departmentRepository.findAll();
     }

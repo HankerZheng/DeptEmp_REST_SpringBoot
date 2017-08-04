@@ -1,7 +1,6 @@
 package net.antra.hanz.service;
 
 import net.antra.hanz.persistence.entity.Course;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

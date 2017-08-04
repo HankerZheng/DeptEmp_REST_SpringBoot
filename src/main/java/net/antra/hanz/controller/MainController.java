@@ -28,12 +28,12 @@ public class MainController {
         return "Hello, " + user + "<br/>" + messageSource.getMessage("greetings", null, Locale.CHINESE);
     }
 
-    @RequestMapping(path="/main/errortest", method=RequestMethod.GET)
+    @RequestMapping(path="/main/errortest")
     public String getErrorTestMessage() throws ErrorTestException{
         throw new ErrorTestException("This is an ErrorTestException thrown from the main controller!");
     }
 
-    @RequestMapping(path="/main/otherexception", method= RequestMethod.GET)
+    @RequestMapping(path="/main/otherexception")
     public String showErrorMsg(@RequestParam Integer num) throws OtherException{
         if (num == 12)  throw new OtherException("Goodbye!");
         return "right!";

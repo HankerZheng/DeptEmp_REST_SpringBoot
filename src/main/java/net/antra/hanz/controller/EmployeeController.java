@@ -20,12 +20,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(path="/employee", method=RequestMethod.GET)
+    @GetMapping(path="/employee")
     public List<Employee> getAllEmployees(){
         return employeeService.findAllEmployees();
     }
 
-    @RequestMapping(path="/employee/id/{id}", method=RequestMethod.GET)
+    @GetMapping(path="/employee/id/{id}")
     public Employee getEmployeeById(@PathVariable Integer id) throws EmployeeNotFoundException{
         Employee e = employeeService.findEmployeeById(id);
         if(e == null) {
@@ -35,7 +35,7 @@ public class EmployeeController {
     }
 
 //    @GetMapping(path="/employee/name/{name}")
-    @RequestMapping(path="/employee/name/{name}", method=RequestMethod.GET)
+    @GetMapping(path="/employee/name/{name}")
     public List<Employee> getEmployeesByName(@PathVariable String name) throws EmployeeNotFoundException{
         List<Employee> eList = employeeService.findEmployeeByName(name);
         if (eList.size() == 0) {
@@ -44,12 +44,12 @@ public class EmployeeController {
         return eList;
     }
 
-    @RequestMapping(path="/employee", method=RequestMethod.POST)
+    @PostMapping(path="/employee")
     public Employee addEmployee(Employee employee, @RequestParam Integer deptId) {
         return employeeService.saveEmployee(employee, deptId);
     }
 
-    @RequestMapping(path="/employee/id/{id}", method=RequestMethod.DELETE)
+    @DeleteMapping(path="/employee/id/{id}")
     public Employee deleteEmployeeById(@PathVariable Integer id) throws EmployeeNotFoundException{
         Employee e = employeeService.deleteEmployeeById(id);
         if(e == null) {
