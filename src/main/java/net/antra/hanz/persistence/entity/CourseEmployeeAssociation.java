@@ -1,6 +1,7 @@
 package net.antra.hanz.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -21,12 +22,12 @@ public class CourseEmployeeAssociation {
 
     @ManyToOne
     @JoinColumn(name="emp_id")
-//    @JsonBackReference
+    @JsonManagedReference
     Employee employee;
 
     @ManyToOne
     @JoinColumn(name="course_id")
-//    @JsonBackReference
+    @JsonManagedReference
     Course course;
 
 
@@ -60,5 +61,9 @@ public class CourseEmployeeAssociation {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public String toString() {
+        return getId() + ": " + getGrade();
     }
 }

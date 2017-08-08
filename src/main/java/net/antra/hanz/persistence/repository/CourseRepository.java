@@ -13,6 +13,6 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     List<Course> findByCourseNameLike(String name);
 
-    @Query("select c from Course c join c.caes cae join cae.employee e where e.empId = ?1")
+    @Query("select c from Course c join c.ceas cea join cea.employee e where e.empId = ?1")
     List<Course> findByEmpId(Integer empId);
 }

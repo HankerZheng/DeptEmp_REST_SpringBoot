@@ -1,5 +1,6 @@
 package net.antra.hanz.controller;
 
+import net.antra.hanz.dto.EmployeeDTO;
 import net.antra.hanz.exception.controller.EmployeeNotFoundException;
 import net.antra.hanz.persistence.entity.Employee;
 import net.antra.hanz.service.EmployeeService;

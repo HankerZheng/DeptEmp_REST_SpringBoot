@@ -30,12 +30,12 @@ public class Employee {
     Integer age;
 
     @OneToMany(mappedBy = "employee")
-//    @JsonBackReference
-    List<CourseEmployeeAssociation> caes;
+    @JsonBackReference
+    List<CourseEmployeeAssociation> ceas;
 
     @ManyToOne
     @JoinColumn(name = "dept_id")
-//    @JsonBackReference
+    @JsonManagedReference
     Department department;
 
     public Integer getEmpId() {
@@ -79,10 +79,14 @@ public class Employee {
     }
 
     public List<CourseEmployeeAssociation> getCeas() {
-        return caes;
+        return ceas;
     }
 
     public void setCeas(List<CourseEmployeeAssociation> ceas) {
-        this.caes = ceas;
+        this.ceas = ceas;
+    }
+
+    public String toString() {
+        return getEmpId() + ": " + getFirstName() + " " + getLastName();
     }
 }
