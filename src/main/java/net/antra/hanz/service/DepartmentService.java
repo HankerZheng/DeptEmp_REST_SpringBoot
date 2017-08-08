@@ -24,4 +24,8 @@ public interface DepartmentService {
     // search queries
     public List<Department> searchDepartmentByName(String name);
     public List<Department> searchDepartmentByEmpId(Integer empId);
+
+
+    // Test Query
+    public List<Department> testQuery();
 }

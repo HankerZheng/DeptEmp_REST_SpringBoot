@@ -17,4 +17,6 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     @Query("select d from Department d join d.employees e where e.empId = ?1")
     List<Department> findByEmpId(Integer empId);
 
+    @Query("select distinct d from Department d left join fetch d.employees")
+    List<Department> testQuery();
 }

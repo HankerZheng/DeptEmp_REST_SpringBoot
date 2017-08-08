@@ -19,14 +19,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @Autowired
-    DepartmentRepository departmentRepository;
-
     @Transactional
     @Override
-    public Employee saveEmployee(Employee e, Integer deptId) {
-        Department d = departmentRepository.findOne(deptId);
-        e.setDepartment(d);
+    public Employee saveEmployee(Employee e) {
         return employeeRepository.save(e);
     }
 
@@ -35,11 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee updateEmployee(Employee e, Integer id) {
         Employee persistEmp = employeeRepository.findOne(id);
         if (persistEmp == null) {
-            return persistEmp;
+            return null;
         }
         persistEmp.setAge(e.getAge());
         persistEmp.setFirstName(e.getFirstName());
         persistEmp.setLastName(e.getLastName());
+        persistEmp.setDepartment(e.getDepartment());
         return employeeRepository.save(persistEmp);
     }
 

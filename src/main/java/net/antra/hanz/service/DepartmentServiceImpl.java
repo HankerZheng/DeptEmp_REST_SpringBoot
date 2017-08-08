@@ -67,4 +67,10 @@ public class DepartmentServiceImpl implements DepartmentService{
         return d;
     }
 
+
+    @Transactional
+    @Override
+    public List<Department> testQuery() {
+        return departmentRepository.testQuery();
+    }
 }

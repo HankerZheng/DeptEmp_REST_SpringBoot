@@ -10,7 +10,7 @@ import java.util.List;
 public interface EmployeeService {
 
     // modification operation
-    public Employee saveEmployee(Employee e, Integer deptId);
+    public Employee saveEmployee(Employee e);
     public Employee updateEmployee(Employee e, Integer id);
 
     // delete operation

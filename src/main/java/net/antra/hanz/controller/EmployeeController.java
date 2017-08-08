@@ -37,8 +37,8 @@ public class EmployeeController {
 
     // Create new employee
     @PostMapping(path="/employees")
-    public Employee addEmployee(Employee employee, @RequestParam Integer deptId) {
-        return employeeService.saveEmployee(employee, deptId);
+    public Employee addEmployee(Employee employee) {
+        return employeeService.saveEmployee(employee);
     }
 
     // Update an existing employee

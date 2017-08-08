@@ -102,6 +102,13 @@ public class DepartmentController {
         return res;
     }
 
+    /*
+     * Test Query
+     */
+    @GetMapping(path="/departments/test")
+    public List<Department> getTestQueryResult() {
+        return departmentService.testQuery();
+    }
 
     /*
      * Exception handler for Department
