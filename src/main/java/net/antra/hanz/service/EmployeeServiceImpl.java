@@ -28,15 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     @Override
     public Employee updateEmployee(Employee e, Integer id) {
-        Employee persistEmp = employeeRepository.findOne(id);
-        if (persistEmp == null) {
-            return null;
-        }
-        persistEmp.setAge(e.getAge());
-        persistEmp.setFirstName(e.getFirstName());
-        persistEmp.setLastName(e.getLastName());
-        persistEmp.setDepartment(e.getDepartment());
-        return employeeRepository.save(persistEmp);
+        e.setEmpId(id);
+        return employeeRepository.save(e);
     }
 
     @Transactional
