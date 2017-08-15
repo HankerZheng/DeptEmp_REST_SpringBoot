@@ -36,13 +36,16 @@ public class Mapper {
             // Only deal with the getter of the object
             if (getter.getName().startsWith("get")){
                 Object res = getter.invoke(d);
+                Class objClazz = res.getClass();
                 if (res instanceof Collection) {
                     List<String> components = new ArrayList<>();
                     for (Object component: (Collection) res) {
                         components.add(component.toString());
                     }
                     retClazz.getMethod("set" + getter.getName().substring(3), List.class).invoke(dtoObj, components);
-                } else if (res != null ){
+                } else if (objClazz.getName().startsWith("java")){
+                    retClazz.getMethod("set" + getter.getName().substring(3), res.getClass()).invoke(dtoObj, res);
+                } else {
                     retClazz.getMethod("set" + getter.getName().substring(3), String.class).invoke(dtoObj, res.toString());
                 }
             }

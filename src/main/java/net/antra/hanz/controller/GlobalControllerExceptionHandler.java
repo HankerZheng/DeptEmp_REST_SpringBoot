@@ -1,4 +1,4 @@
-package net.antra.hanz.config;
+package net.antra.hanz.controller;
 
 import net.antra.hanz.exception.ErrorTestException;
 import net.antra.hanz.exception.OtherException;
